@@ -1,0 +1,12 @@
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/bin/Debug/net6.0/Core.deps.json
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/bin/Debug/net6.0/Core.dll
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/bin/Debug/net6.0/Core.pdb
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/Core.csproj.AssemblyReference.cache
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/Core.AssemblyInfoInputs.cache
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/Core.AssemblyInfo.cs
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/Core.csproj.CoreCompileInputs.cache
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/Core.dll
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/refint/Core.dll
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/Core.pdb
+/Users/crpin95/Documents/Project/monneyManagement/src/Core/obj/Debug/net6.0/ref/Core.dll

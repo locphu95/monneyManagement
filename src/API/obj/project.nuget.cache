@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "6cWNX7M2J84iq9rSAEbD4VLrKi1B/rO2tTxXh2aoDCC4xkl9KwnoE61c59tjvKHIwdp/tQe1J0rNMzWnyDF5ZA==",
+  "success": true,
+  "projectFilePath": "/Users/crpin95/Documents/Project/monneyManagement/src/API/API.csproj",
+  "expectedPackageFiles": [
+    "/Users/crpin95/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "/Users/crpin95/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/Users/crpin95/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
+    "/Users/crpin95/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
+    "/Users/crpin95/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "/Users/crpin95/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512"
+  ],
+  "logs": []
+}
