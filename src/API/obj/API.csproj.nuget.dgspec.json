@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Project\\monneyManagement\\src\\API\\API.csproj": {}
+    "E:\\Soucre\\monneyManagement\\src\\API\\API.csproj": {}
   },
   "projects": {
-    "E:\\Project\\monneyManagement\\src\\API\\API.csproj": {
+    "E:\\Soucre\\monneyManagement\\src\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Project\\monneyManagement\\src\\API\\API.csproj",
+        "projectUniqueName": "E:\\Soucre\\monneyManagement\\src\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "E:\\Project\\monneyManagement\\src\\API\\API.csproj",
-        "packagesPath": "C:\\Users\\Phu Loc\\.nuget\\packages\\",
-        "outputPath": "E:\\Project\\monneyManagement\\src\\API\\obj\\",
+        "projectPath": "E:\\Soucre\\monneyManagement\\src\\API\\API.csproj",
+        "packagesPath": "C:\\Users\\CrPin95\\.nuget\\packages\\",
+        "outputPath": "E:\\Soucre\\monneyManagement\\src\\API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Phu Loc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\CrPin95\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "E:\\Project\\monneyManagement\\src\\Core\\Core.csproj": {
-                "projectPath": "E:\\Project\\monneyManagement\\src\\Core\\Core.csproj"
+              "E:\\Soucre\\monneyManagement\\src\\Core\\Core.csproj": {
+                "projectPath": "E:\\Soucre\\monneyManagement\\src\\Core\\Core.csproj"
               }
             }
           }
@@ -46,13 +46,19 @@
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[6.0.11, )"
+              "version": "[6.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[7.0.0, )"
+              "version": "[6.0.8, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.8, )"
             },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
@@ -82,21 +88,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "E:\\Project\\monneyManagement\\src\\Core\\Core.csproj": {
+    "E:\\Soucre\\monneyManagement\\src\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Project\\monneyManagement\\src\\Core\\Core.csproj",
+        "projectUniqueName": "E:\\Soucre\\monneyManagement\\src\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "E:\\Project\\monneyManagement\\src\\Core\\Core.csproj",
-        "packagesPath": "C:\\Users\\Phu Loc\\.nuget\\packages\\",
-        "outputPath": "E:\\Project\\monneyManagement\\src\\Core\\obj\\",
+        "projectPath": "E:\\Soucre\\monneyManagement\\src\\Core\\Core.csproj",
+        "packagesPath": "C:\\Users\\CrPin95\\.nuget\\packages\\",
+        "outputPath": "E:\\Soucre\\monneyManagement\\src\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Phu Loc\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\CrPin95\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -128,23 +134,27 @@
             },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[6.0.11, )"
+              "version": "[6.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.11, )"
+              "version": "[6.0.8, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[6.0.11, )"
+              "version": "[6.0.8, )"
             },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.7, )"
+            },
+            "MySqlConnector": {
+              "target": "Package",
+              "version": "[2.2.3, )"
             },
             "NLog": {
               "target": "Package",
@@ -167,7 +177,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\6.0.403\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
