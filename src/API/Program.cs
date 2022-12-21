@@ -1,5 +1,5 @@
 using API.Extensions;
-using Core.Extensions.ConfigLog;
+using Core;
 using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,7 +9,7 @@ LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "\\N
 LoggerManager logger = new LoggerManager();
 
 builder.Services.ConfigureResponseCaching();
-
+builder.Services.RegisterDependencies();
 builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureMySQLContext(builder.Configuration);
 

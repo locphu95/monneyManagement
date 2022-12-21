@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Models
+namespace Core
 {
     [Table("category_income")]
     public class CategoryInCome : BaseEntity

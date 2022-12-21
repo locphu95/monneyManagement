@@ -163,3 +163,7 @@ E:\Soucre\monneyManagement\src\API\obj\Debug\net6.0\refint\API.dll
 E:\Soucre\monneyManagement\src\API\obj\Debug\net6.0\API.pdb
 E:\Soucre\monneyManagement\src\API\obj\Debug\net6.0\API.genruntimeconfig.cache
 E:\Soucre\monneyManagement\src\API\obj\Debug\net6.0\ref\API.dll
+E:\Soucre\monneyManagement\src\API\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+E:\Soucre\monneyManagement\src\API\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+E:\Soucre\monneyManagement\src\API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+E:\Soucre\monneyManagement\src\API\bin\Debug\net6.0\Newtonsoft.Json.dll

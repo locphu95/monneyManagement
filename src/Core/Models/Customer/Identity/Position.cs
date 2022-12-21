@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Models.Customer.Identity
+namespace Core
 {
     [Table("position")]
     public class Position : BaseEntity

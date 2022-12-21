@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Models.Customer.Personal
+namespace Core
 {
     [Table("profile")]
     public class Profile : BaseEntity

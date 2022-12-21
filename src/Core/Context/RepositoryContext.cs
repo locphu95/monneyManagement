@@ -1,18 +1,16 @@
-﻿using Core.Models;
-using Core.Models.Customer.Identity;
-using Core.Models.Customer.Personal;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 
-namespace Core.Connect
+namespace Core
 {
     public class RepositoryContext : IdentityDbContext<User>
     {
         protected readonly IConfiguration Configuration;
 
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public RepositoryContext(DbContextOptions options, IConfiguration configuration) : base(options)
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Configuration = configuration;
         }

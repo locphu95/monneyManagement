@@ -1,14 +1,7 @@
 ﻿using NLog;
 
-namespace Core.Extensions.ConfigLog
+namespace Core
 {
-    public interface ILoggerManager
-    {
-        void LogInfo(string message);
-        void LogWarn(string message);
-        void LogDebug(string message);
-        void LogError(string message);
-    }
     public class LoggerManager : ILoggerManager
     {
         private static ILogger logger = LogManager.GetCurrentClassLogger();

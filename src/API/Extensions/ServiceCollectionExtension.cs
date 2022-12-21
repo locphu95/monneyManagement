@@ -1,12 +1,8 @@
-﻿using Core.Connect;
-using Core.Extensions.ConfigLog;
-using Core.Models.Customer.Identity;
+﻿using Core;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -77,9 +73,12 @@ namespace API.Extensions
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(options =>
             {
+                options.SaveToken = true;
+                options.RequireHttpsMetadata = false;
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuer = true,
@@ -135,11 +134,11 @@ namespace API.Extensions
             });
         }
 
-        //public static void RegisterDependencies(this IServiceCollection services)
-        //{
-        //    services.AddScoped<ValidationFilterAttribute>();
-        //    services.AddScoped<ValidateTeacherExists>();
-        //    services.AddScoped<ValidateStudentExistsForTeacher>();
-        //}
+        public static void RegisterDependencies(this IServiceCollection services)
+        {
+            services.AddScoped<ValidationFilterAttribute>();
+    //        services.AddScoped<ValidateTeacherExists>();
+   //         services.AddScoped<ValidateStudentExistsForTeacher>();
+        }
     }
 }

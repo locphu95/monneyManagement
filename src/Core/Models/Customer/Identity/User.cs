@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace Core.Models.Customer.Identity
+namespace Core
 {
     public class User : IdentityUser
     {
@@ -8,5 +8,7 @@ namespace Core.Models.Customer.Identity
         //userId of user Corp
         public string? CorporationId { get; set; }
         public string? ContractId { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpiryTime { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Models
+namespace Core
 {
     [Table("history_change_expense")]
     public class HistoryChangeExpense : BaseEntity

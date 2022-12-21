@@ -1,5 +1,4 @@
-﻿using Core.Extensions.ConfigLog;
-using Core.Models.Aplication;
+﻿using Core;
 using Microsoft.AspNetCore.Diagnostics;
 using System.Net;
 

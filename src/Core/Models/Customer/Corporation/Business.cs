@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Core.Models
+namespace Core
 {
     [Table("business")]
     public class Business : BaseEntity

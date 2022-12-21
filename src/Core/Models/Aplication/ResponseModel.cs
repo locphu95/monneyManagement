@@ -1,6 +1,6 @@
 ﻿using System.Text.Json;
 
-namespace Core.Models.Aplication
+namespace Core
 {
     public class ResponseModel
     {
