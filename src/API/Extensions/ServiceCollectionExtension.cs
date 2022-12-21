@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
@@ -19,9 +21,10 @@ namespace API.Extensions
 
         public static void ConfigureMySQLContext(this IServiceCollection services, IConfiguration configuration)
         {
+            var connetionString = configuration.GetConnectionString("WebApiDatabase");
+
             services.AddDbContext<RepositoryContext>(
-                opts => opts.UseMySQL(connectionString: configuration.GetConnectionString("WebApiDatabase"),
-                    b => b.MigrationsAssembly("Core")));
+                opts => opts.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
         }
 
         //public static void ConfigureRepositoryManager(this IServiceCollection services)

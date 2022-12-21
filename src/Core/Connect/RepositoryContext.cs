@@ -3,20 +3,23 @@ using Core.Models.Customer.Identity;
 using Core.Models.Customer.Personal;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Core.Connect
 {
     public class RepositoryContext : IdentityDbContext<User>
     {
-        public RepositoryContext(DbContextOptions options) : base(options)
+        protected readonly IConfiguration Configuration;
+
+        public RepositoryContext(DbContextOptions options, IConfiguration configuration) : base(options)
         {
+            Configuration = configuration;
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseMySQL("server=localhost;port=3306;user=root;password=;database=demo");
-            }
+            var connectionString = Configuration.GetConnectionString("WebApiDatabase");
+            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
