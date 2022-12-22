@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public class UserRegistrationDto
+    public class UserRegistrationRequest : BaseRequest
     {
         public string? FirstName { get; init; }
         public string? LastName { get; init; }

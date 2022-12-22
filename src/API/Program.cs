@@ -9,20 +9,30 @@ LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "\\N
 LoggerManager logger = new LoggerManager();
 
 builder.Services.ConfigureResponseCaching();
+
 builder.Services.RegisterDependencies();
+builder.Services.ConfigureMapping();
 builder.Services.ConfigureLoggerService();
+
 builder.Services.ConfigureMySQLContext(builder.Configuration);
 
+builder.Services.ConfigureRepositoryManager();
+
 builder.Services.AddAuthentication();
+
 builder.Services.ConfigureIdentity();
+
 builder.Services.ConfigureJWT(builder.Configuration);
+
 builder.Services.ConfigureControllers();
 
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+builder.Services.ConfigureSwagger();
 builder.Services.AddSwaggerGen();
+
 
 var app = builder.Build();
 

@@ -20,7 +20,7 @@ namespace Core
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
             var param = context.ActionArguments
                 .SingleOrDefault(x => x.Value.ToString()
-                .Contains("Dto")).Value;
+                .Contains("Request")).Value;
 #pragma warning restore CS8602 // Dereference of a possibly null reference.
 
             if (param is null)

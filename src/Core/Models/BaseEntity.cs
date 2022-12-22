@@ -19,12 +19,14 @@ namespace Core
     public class BaseResponse : BaseRequest
     {
         public string? Status { get; set;}
+        public string? ResCode { get; set;}
         public string? Message { get; set;}
-        public BaseResponse(string requestID)
+        public BaseResponse(string? requestID,string? channel)
         {
             RequestTime= DateTime.UtcNow;
             RequestId = requestID;
-        }
+            Channel = channel;
+        }      
     }
     public class BaseRequest
     {

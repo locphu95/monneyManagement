@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.Models.Dtos.Auth;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -26,11 +27,34 @@ namespace Core
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task<IdentityResult> RegisterUserAsync(UserRegistrationDto userRegistration)
+        public async Task<IdentityResult> RegisterUserAsync(UserRegistrationRequest userRegistration)
         {
-            var user = _mapper.Map<User>(userRegistration);
-            var result = await _userManager.CreateAsync(user, userRegistration.Password);
-            return result;
+            IdentityResult? identityResult = new IdentityResult();
+            try
+            {
+                var user = new User { UserName = userRegistration.UserName,Email=userRegistration.Email, 
+                    PhoneNumber = userRegistration.PhoneNumber,ChannelId = userRegistration.Channel };
+                if (user == null)
+                {
+
+                }
+                var userExists = await _userManager.FindByNameAsync(userRegistration.UserName);
+                if (userExists != null)
+                    return identityResult;
+
+                identityResult = await _userManager.CreateAsync(user, userRegistration.Password);
+                if (!identityResult.Succeeded)
+                {
+                    return identityResult;
+                }
+                return identityResult;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug($"Error: >>{ex}");
+                return identityResult;
+            }
+
         }
 
         public async Task<User> ValidateUserAsync(LoginRequest loginDto)
@@ -44,6 +68,7 @@ namespace Core
 
         public async Task<LoginResponse> CreateTokenAsync(User user)
         {
+
             try
             {
                 var jwtSettings = _configuration.GetSection("JwtConfig");
@@ -51,16 +76,20 @@ namespace Core
                 var claims = await GetClaims();
                 var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
                 string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                string refreshToken = GenerateRefreshToken();
-                user.RefreshToken = refreshToken;
-                _ = int.TryParse(_configuration["JWT:RefreshTokenValidityInDays"], out int refreshTokenValidityInDays);
-                user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
+                string? refreshToken= user.RefreshToken;
+                if(!string.IsNullOrEmpty(user.RefreshToken) || user.RefreshTokenExpiryTime<= DateTime.Now) { }
+                {
+                    _ = int.TryParse(jwtSettings["refreshTokenValidityInDays"], out int refreshTokenValidityInDays);
+                    refreshToken = user.RefreshToken = GenerateRefreshToken();
+                    user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
+                }
+                
                 await _userManager.UpdateAsync(user);
-                return new LoginResponse(requestID: user.Id)
+                return new LoginResponse(requestID: user.Id, channelId: "")
                 {
                     Token = token,
                     RefreshToken = refreshToken,
-                    Expiration = 10,                
+                    Expiration = 10,
                 };
             }
             catch (Exception ex)
@@ -114,8 +143,8 @@ namespace Core
             using var rng = RandomNumberGenerator.Create();
             rng.GetBytes(randomNumber);
             return Convert.ToBase64String(randomNumber);
-        } 
-        
+        }
+
         public async Task<RefreshResponse> RefreshToken(RefreshRequest refreshRequest)
         {
             try
@@ -123,43 +152,44 @@ namespace Core
                 string? accessToken = refreshRequest.AccessToken;
                 string? refreshToken = refreshRequest.RefreshToken;
 
-                ClaimsPrincipal principal = GetPrincipalFromExpiredToken(accessToken);
+                ClaimsPrincipal? principal = GetPrincipalFromExpiredToken(accessToken);
                 if (principal == null)
                 {
-                    return new RefreshResponse("a") {
-                        Message = "Invalid access token or refresh token",
-                        Status = "400"
-                    }; 
-                }
-                string? username = principal?.Identity?.Name;
-
-                var user = await _userManager.FindByNameAsync(username);
-
-                if (user == null || user.RefreshToken != refreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
-                {
-                    return new RefreshResponse("a")
+                    return new RefreshResponse("a", "a")
                     {
                         Message = "Invalid access token or refresh token",
                         Status = "400"
                     };
                 }
-                LoginResponse? newAccessToken = await CreateTokenAsync(user);
+                string? username = principal?.Identity?.Name;
 
+                _user = await _userManager.FindByNameAsync(username);
 
-                return new RefreshResponse("a")
+                if (_user == null || _user.RefreshToken != refreshToken || _user.RefreshTokenExpiryTime <= DateTime.Now)
                 {
-                    Status ="200" ,
+                    return new RefreshResponse("a", "a")
+                    {
+                        Message = "Invalid access token or refresh token",
+                        Status = "400"
+                    };
+                }
+                LoginResponse? newAccessToken = await CreateTokenAsync(_user);
+
+
+                return new RefreshResponse("a", "a")
+                {
+                    Status = "200",
                     AccessToken = newAccessToken.Token,
                     RefreshToken = newAccessToken.RefreshToken,
                 };
             }
             catch (Exception ex)
             {
-                return new RefreshResponse("a")
+                return new RefreshResponse("a", "a")
                 {
-                    Status = "500",                 
+                    Status = "500",
                 };
-            }       
+            }
         }
         private ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
         {
@@ -179,6 +209,39 @@ namespace Core
             if (securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
                 throw new SecurityTokenException("Invalid token");
             return principal;
+        }
+
+        public async Task<RevokeResponse> Revoke(RevokeResquest resquest)
+        {
+            RevokeResponse response = new RevokeResponse(resquest?.RequestId, resquest?.Channel);
+            try
+            {
+                _user = await _userManager.FindByNameAsync(resquest?.UserName);
+
+                if (_user == null)
+                {
+                    response.Status = "404"; response.ResCode = "00";
+                }
+                _user.RefreshToken = null;
+                await _userManager.UpdateAsync(_user);
+
+                return response;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogDebug(ex.ToString());
+                response.ResCode = "05";
+                response.Message = "05";
+                response.Status = "505";
+                return response;
+            }
+
+
+        }
+
+        public Task<RevokeResponse> RevokeAll()
+        {
+            throw new NotImplementedException();
         }
     }
 }

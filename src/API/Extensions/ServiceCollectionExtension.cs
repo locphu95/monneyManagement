@@ -1,4 +1,6 @@
-﻿using Core;
+﻿using AutoMapper;
+using Core;
+using Core.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -23,20 +25,20 @@ namespace API.Extensions
                 opts => opts.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
         }
 
-        //public static void ConfigureRepositoryManager(this IServiceCollection services)
-        //    => services.AddScoped<IRepositoryManager, RepositoryManager>();
+        public static void ConfigureRepositoryManager(this IServiceCollection services)
+            => services.AddScoped<IManager, Manager>();
 
-        //public static void ConfigureMapping(this IServiceCollection services)
-        //{
-        //    services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
-        //    var mapperConfig = new MapperConfiguration(map =>
-        //    {
-        //        map.AddProfile<TeacherMappingProfile>();
-        //        map.AddProfile<StudentMappingProfile>();
-        //        map.AddProfile<UserMappingProfile>();
-        //    });
-        //    services.AddSingleton(mapperConfig.CreateMapper());
-        //}
+        public static void ConfigureMapping(this IServiceCollection services)
+        {
+            services.Configure<ApiBehaviorOptions>(options => { options.SuppressModelStateInvalidFilter = true; });
+            var mapperConfig = new MapperConfiguration(map =>
+            {
+                //map.AddProfile<TeacherMappingProfile>();
+                //map.AddProfile<StudentMappingProfile>();
+                //map.AddProfile<UserMappingProfile>();
+            });
+            services.AddSingleton(mapperConfig.CreateMapper());
+        }
 
 
         public static void ConfigureControllers(this IServiceCollection services)
@@ -137,8 +139,8 @@ namespace API.Extensions
         public static void RegisterDependencies(this IServiceCollection services)
         {
             services.AddScoped<ValidationFilterAttribute>();
-    //        services.AddScoped<ValidateTeacherExists>();
-   //         services.AddScoped<ValidateStudentExistsForTeacher>();
+            //        services.AddScoped<ValidateTeacherExists>();
+            //         services.AddScoped<ValidateStudentExistsForTeacher>();
         }
     }
 }

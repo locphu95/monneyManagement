@@ -12,7 +12,7 @@ namespace Core.Models.Dtos.Auth
     }
     public class LoginResponse : BaseResponse
     {
-        public LoginResponse(string requestID) : base(requestID)
+        public LoginResponse(string requestID,string channelId) : base(requestID,channelId)
         {
         }
 

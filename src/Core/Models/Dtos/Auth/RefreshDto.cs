@@ -7,7 +7,7 @@
     }
     public class RefreshResponse : BaseResponse
     {
-        public RefreshResponse(string requestID) : base(requestID)
+        public RefreshResponse(string requestID,string channelId) : base(requestID, channelId)
         {
         }
         public string? AccessToken { get; set; }
