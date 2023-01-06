@@ -2,7 +2,6 @@
 using Core;
 using Core.Models.Dtos.Auth;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -24,7 +23,7 @@ namespace API.Controllers
                 ? Unauthorized()
                 : Ok(await _repository.Authen.CreateTokenAsync(resoultLogin));
         }
-       // [Authorize]
+        [Authorize]
         [HttpPost("refresh-token")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshRequest token)
@@ -66,7 +65,7 @@ namespace API.Controllers
             var userExists = await _repository.Authen.RegisterUserAsync(model);
             if (userExists == null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists!" });
-            return Ok(new  { Status = "Success", Message = "User created successfully!" });
+            return Ok(new { Status = "Success", Message = "User created successfully!" });
         }
 
     }

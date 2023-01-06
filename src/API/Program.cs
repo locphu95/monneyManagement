@@ -18,7 +18,10 @@ builder.Services.ConfigureMySQLContext(builder.Configuration);
 
 builder.Services.ConfigureRepositoryManager();
 
+builder.Services.AddAuthorization();
+
 builder.Services.AddAuthentication();
+
 
 builder.Services.ConfigureIdentity();
 
@@ -45,11 +48,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
-
 app.UseResponseCaching();
 
 app.UseAuthentication();
+
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
