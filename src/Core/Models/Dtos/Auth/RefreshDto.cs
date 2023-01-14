@@ -1,4 +1,4 @@
-﻿namespace Core.Models.Dtos.Auth
+﻿namespace Core
 {
     public class RefreshRequest : BaseRequest
     {

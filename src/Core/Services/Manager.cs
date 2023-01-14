@@ -30,7 +30,7 @@ namespace Core.Services
             get
             {
                 if (_userAuth is null)
-                    _userAuth = new UserAuth(_userManager, _configuration, _mapper,_logger);
+                    _userAuth = new Auth(_userManager, _configuration, _mapper,_logger);
                 return _userAuth;
             }
         }

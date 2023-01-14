@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Core.Models.Dtos.Auth
+namespace Core
 {
     public class LoginRequest : BaseRequest
     {
@@ -15,7 +15,6 @@ namespace Core.Models.Dtos.Auth
         public LoginResponse(string requestID,string channelId) : base(requestID,channelId)
         {
         }
-
         public string? Token { get; set; }
         public string? RefreshToken { get; set; }
         public int? Expiration { get; set; }

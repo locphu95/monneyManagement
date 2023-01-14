@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,5 +17,6 @@ namespace API.Controllers
             _logger = logger;
             _mapper = mapper;
         }
+       
     }
 }

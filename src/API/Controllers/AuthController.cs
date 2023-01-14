@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Core;
-using Core.Models.Dtos.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

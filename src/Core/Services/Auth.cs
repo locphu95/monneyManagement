@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
-using Core.Models.Dtos.Auth;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,7 +9,7 @@ using System.Text;
 
 namespace Core
 {
-    public class UserAuth : IUserAuth
+    public class Auth : IAuth
     {
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
@@ -20,7 +17,7 @@ namespace Core
         private User? _user;
         protected readonly ILoggerManager _logger;
 
-        public UserAuth(UserManager<User> userManager, IConfiguration configuration, IMapper mapper, ILoggerManager logger)
+        public Auth(UserManager<User> userManager, IConfiguration configuration, IMapper mapper, ILoggerManager logger)
         {
             _userManager = userManager;
             _configuration = configuration;
@@ -32,8 +29,13 @@ namespace Core
             IdentityResult? identityResult = new IdentityResult();
             try
             {
-                var user = new User { UserName = userRegistration.UserName,Email=userRegistration.Email, 
-                    PhoneNumber = userRegistration.PhoneNumber,ChannelId = userRegistration.Channel };
+                var user = new User
+                {
+                    UserName = userRegistration.UserName,
+                    Email = userRegistration.Email,
+                    PhoneNumber = userRegistration.PhoneNumber,
+                    ChannelId = userRegistration.Channel
+                };
                 if (user == null)
                 {
 
@@ -76,14 +78,14 @@ namespace Core
                 var claims = await GetClaims();
                 var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
                 string token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
-                string? refreshToken= user.RefreshToken;
-                if(!string.IsNullOrEmpty(user.RefreshToken) || user.RefreshTokenExpiryTime<= DateTime.Now) { }
+                string? refreshToken = user.RefreshToken;
+                if (!string.IsNullOrEmpty(user.RefreshToken) || user.RefreshTokenExpiryTime <= DateTime.Now) { }
                 {
                     _ = int.TryParse(jwtSettings["refreshTokenValidityInDays"], out int refreshTokenValidityInDays);
                     refreshToken = user.RefreshToken = GenerateRefreshToken();
                     user.RefreshTokenExpiryTime = DateTime.Now.AddDays(refreshTokenValidityInDays);
                 }
-                
+
                 await _userManager.UpdateAsync(user);
                 return new LoginResponse(requestID: user.Id, channelId: "")
                 {
@@ -137,6 +139,7 @@ namespace Core
             );
             return tokenOptions;
         }
+        
         private static string GenerateRefreshToken()
         {
             var randomNumber = new byte[64];
@@ -175,7 +178,6 @@ namespace Core
                 }
                 LoginResponse? newAccessToken = await CreateTokenAsync(_user);
 
-
                 return new RefreshResponse("a", "a")
                 {
                     Status = "200",
@@ -191,6 +193,7 @@ namespace Core
                 };
             }
         }
+        
         private ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
         {
             var jwtConfig = _configuration.GetSection("jwtConfig");

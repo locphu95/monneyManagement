@@ -1,9 +1,8 @@
-﻿using Core.Models.Dtos.Auth;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace Core
 {
-    public interface IUserAuth
+    public interface IAuth
     {
         Task<IdentityResult> RegisterUserAsync(UserRegistrationRequest userForRegistration);
         Task<User> ValidateUserAsync(LoginRequest loginDto);

@@ -2,7 +2,7 @@
 {
     public interface IManager
     {
-        IUserAuth Authen { get; }
+        IAuth Authen { get; }
         Task SaveAsync();
     }
 }
