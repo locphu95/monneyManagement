@@ -7,7 +7,7 @@ namespace Core.Services
     public class Manager : IManager
     {
         private RepositoryContext _repositoryContext;
-        private IUserAuth _userAuth;
+        private Auth _userAuth;
 
 
         private UserManager<User> _userManager;
@@ -25,7 +25,7 @@ namespace Core.Services
             _logger = logger;
         }
 
-        public IUserAuth Authen
+        public IAuth Authen
         {
             get
             {
@@ -34,6 +34,7 @@ namespace Core.Services
                 return _userAuth;
             }
         }
+
 
         public Task SaveAsync() => _repositoryContext.SaveChangesAsync();
 
