@@ -99,13 +99,18 @@ namespace API.Extensions
             {
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
-                    Title = "Student Teacher API",
+                    Title = "MoneyManager API",
                     Version = "v1",
-                    Description = "Student Teacher API Services.",
+                    Description = "API Services.",
                     Contact = new OpenApiContact
                     {
-                        Name = "Ajide Habeeb."
+                        Name = "Nguyễn Phú Lộc"
                     },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
                 });
                 c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

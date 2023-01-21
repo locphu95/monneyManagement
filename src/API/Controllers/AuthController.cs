@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -9,7 +10,7 @@ namespace API.Controllers
     [ApiController]
     public class AuthController : BaseController
     {
-        public AuthController(IManager repository, ILoggerManager logger, IMapper mapper) : base(repository, logger, mapper)
+        public AuthController(IManager repository, ILoggerManager logger, IMapper mapper,UserManager<User> userManager) : base(repository, logger, mapper,userManager)
         {
         }
 
