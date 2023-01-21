@@ -5,14 +5,18 @@ using NLog;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "\\NLog.Config"));
+//Todu: change config when run soucre with MacOS / | Window \\
+LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/NLog.Config"));
 LoggerManager logger = new LoggerManager();
 
 builder.Services.ConfigureResponseCaching();
 
 builder.Services.RegisterDependencies();
+
 builder.Services.ConfigureMapping();
+
 builder.Services.ConfigureLoggerService();
+
 
 builder.Services.ConfigureMySQLContext(builder.Configuration);
 
@@ -40,11 +44,11 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
+// if (app.Environment.IsDevelopment())
+// {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+//}
 
 app.UseHttpsRedirection();
 

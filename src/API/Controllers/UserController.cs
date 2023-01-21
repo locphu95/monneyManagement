@@ -30,7 +30,7 @@ namespace API.Controllers
             //    ? Unauthorized()
             //    : Ok(resoultLogin);
 
-            return getUser;
+            return Ok();
         }
     }
 }

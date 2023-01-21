@@ -20,7 +20,6 @@ namespace API.Extensions
         public static void ConfigureMySQLContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connetionString = configuration.GetConnectionString("WebApiDatabase");
-
             services.AddDbContext<RepositoryContext>(
                 opts => opts.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
         }
