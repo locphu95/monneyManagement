@@ -7,8 +7,8 @@ namespace Core.Services
     public class Manager : IManager
     {
         private RepositoryContext _repositoryContext;
-        private Auth _userAuth;
-
+        private Auth? _userAuth;
+        private UserService? _userService;
 
         private UserManager<User> _userManager;
         private IMapper _mapper;
@@ -30,11 +30,22 @@ namespace Core.Services
             get
             {
                 if (_userAuth is null)
-                    _userAuth = new Auth(_userManager, _configuration, _mapper,_logger);
+                    _userAuth = new Auth(_userManager, _configuration, _mapper, _logger);
                 return _userAuth;
             }
         }
 
+        public IUser UserService
+        {
+            get
+            {
+                if (_userService is null)
+                    _userService = new UserService(_userManager, _configuration, _mapper, _logger);
+                return _userService;
+            }
+        }
+
+        
 
         public Task SaveAsync() => _repositoryContext.SaveChangesAsync();
 

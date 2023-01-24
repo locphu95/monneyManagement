@@ -1,0 +1,22 @@
+dotnet ef --program-project ../API/ database update 
+
+--project src/Core
+
+
+dotnet ef  database update --startup-project ../API/
+
+dotnet ef database update initialcreation -s ../API/API.csproj
+
+
+dotnet ef database update 
+
+
+dotnet ef --startup-project ../my_startup_project_path/ migrations add myMigration01
+
+
+
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibG9jcGh1OTUiLCJleHAiOjE2NzQzMjI4MjEsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcyNzEvIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI3MS8ifQ.fu-XN1Ca8mhaYB8oCvMUoauy-Iia8RVvD4Xjvmh-bwo
+
+
+
+Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibG9jcGh1OTUiLCJleHAiOjE2NzQzMjQyODgsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcyNzEvIiwiYXVkIjoiaHR0cHM6Ly9sb2NhbGhvc3Q6NzI3MS8ifQ.P-3Z6zWdx6aq2v5yt4iLaffxcLOKOviYDxEyleIyP_M

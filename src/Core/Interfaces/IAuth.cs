@@ -10,5 +10,6 @@ namespace Core
         Task<RefreshResponse> RefreshToken(RefreshRequest refreshRequest);
         Task<RevokeResponse> Revoke(RevokeResquest resquest);
         Task<RevokeResponse> RevokeAll();
+        
     }
 }

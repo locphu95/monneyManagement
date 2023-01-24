@@ -21,16 +21,12 @@ namespace Core
             _logger = logger;
         }
 
-        public Task<UpdateProfileRequestResponse> UpdateProfile(UpdateProfileRequest userForRegistration)
+        public Task<UpdateProfileRequestResponse> UpdateProfile(User userinfo,UpdateProfileRequest userForRegistration)
         {
             //
             throw new NotImplementedException();
         }
 
-        public Task<UploadLogoResponse> UploadImage(UploadLogoRequest updateProfileRequest)
-        {
 
-            throw new NotImplementedException();
-        }
     }
 }

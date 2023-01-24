@@ -35,8 +35,10 @@
 /Users/crpin95/Documents/Project/monneyManagement/src/API/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /Users/crpin95/Documents/Project/monneyManagement/src/API/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
 /Users/crpin95/Documents/Project/monneyManagement/src/API/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/crpin95/Documents/Project/monneyManagement/src/API/bin/Debug/net6.0/Common.dll
 /Users/crpin95/Documents/Project/monneyManagement/src/API/bin/Debug/net6.0/Core.dll
 /Users/crpin95/Documents/Project/monneyManagement/src/API/bin/Debug/net6.0/Core.pdb
+/Users/crpin95/Documents/Project/monneyManagement/src/API/bin/Debug/net6.0/Common.pdb
 /Users/crpin95/Documents/Project/monneyManagement/src/API/obj/Debug/net6.0/API.csproj.AssemblyReference.cache
 /Users/crpin95/Documents/Project/monneyManagement/src/API/obj/Debug/net6.0/API.GeneratedMSBuildEditorConfig.editorconfig
 /Users/crpin95/Documents/Project/monneyManagement/src/API/obj/Debug/net6.0/API.AssemblyInfoInputs.cache

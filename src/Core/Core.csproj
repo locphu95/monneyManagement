@@ -39,6 +39,6 @@
 
   <ItemGroup>
     <Folder Include="Extensions\ConfigLog\" />
+    <ProjectReference Include="..\Common\Common.csproj" />
   </ItemGroup>
-
 </Project>

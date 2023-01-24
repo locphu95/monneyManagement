@@ -12,5 +12,8 @@ namespace Core
         public string? Password { get; init; }
         public string? Email { get; init; }
         public string? PhoneNumber { get; init; }
+        public bool CreateFash {get;set;} = true;
+        public string? RoleName {get;set;}
+        public string? RoleId {get;set;}
     }
 }

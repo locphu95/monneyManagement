@@ -34,8 +34,7 @@ namespace API.Controllers
                 : Ok(resoultLogin);
         }
         [Authorize]
-        [HttpPost]
-        [Route("revoke/{username}")]
+        [HttpPost("revoke/{username}")]
         public async Task<IActionResult> Revoke(RevokeResquest resquest)
         {
             RevokeResponse response = await _repository.Authen.Revoke(resquest);
@@ -57,8 +56,7 @@ namespace API.Controllers
 
         //    return NoContent();
         //}
-        [HttpPost]
-        [Route("register")]
+        [HttpPost("register")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest model)
         {
@@ -67,7 +65,6 @@ namespace API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists!" });
             return Ok(new { Status = "Success", Message = "User created successfully!" });
         }
-
     }
 
 }

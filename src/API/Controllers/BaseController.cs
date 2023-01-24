@@ -19,8 +19,7 @@ namespace API.Controllers
             _mapper = mapper;
             _userManager = userManager;
         }
-
-
+        [NonAction]
         public async Task<User> GetUser()
         { 
             return await _userManager.FindByNameAsync(HttpContext?.User?.Identity?.Name);

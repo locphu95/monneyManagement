@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Common.Emun;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -6,6 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Transactions;
 
 namespace Core
 {
@@ -36,27 +38,53 @@ namespace Core
                     PhoneNumber = userRegistration.PhoneNumber,
                     ChannelId = userRegistration.Channel
                 };
-                if (user == null)
-                {
-
-                }
+               
                 var userExists = await _userManager.FindByNameAsync(userRegistration.UserName);
                 if (userExists != null)
                     return identityResult;
 
-                identityResult = await _userManager.CreateAsync(user, userRegistration.Password);
-                if (!identityResult.Succeeded)
+                using (var scope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
                 {
-                    return identityResult;
+                    try
+                    {
+                        identityResult = await _userManager.CreateAsync(user, userRegistration.Password);
+                        //todo insert role_user
+                        await _userManager.AddToRoleAsync(user, userRegistration.CreateFash ? RoleType.User.ToString() : userRegistration.RoleName);
+
+                        //todo check channge request
+                        // user claim when using web
+                        //exemple code:
+                        // var claims = new List<Claim>();
+                        // claims.Add(new Claim(ClaimTypes.Name, "Brock"));
+                        // claims.Add(new Claim(ClaimTypes.Email, "brockallen@gmail.com"));
+                        // var id = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+
+                        // var ctx = Request.GetOwinContext();
+                        // var authenticationManager = ctx.Authentication;
+                        // authenticationManager.SignIn(id);
+
+                        if (!identityResult.Succeeded)
+                        {
+                            scope.Dispose();
+                            return identityResult;
+                        }
+                        scope.Complete();
+                        return identityResult;
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogDebug($"Error: >>{ex}");
+                        return identityResult;
+                    }
                 }
-                return identityResult;
+
             }
             catch (Exception ex)
             {
-                _logger.LogDebug($"Error: >>{ex}");
+
+                Console.WriteLine($"CreateUserError:{ex}");
                 return identityResult;
             }
-
         }
 
         public async Task<User> ValidateUserAsync(LoginRequest loginDto)
@@ -70,7 +98,6 @@ namespace Core
 
         public async Task<LoginResponse> CreateTokenAsync(User user)
         {
-
             try
             {
                 var jwtSettings = _configuration.GetSection("JwtConfig");
@@ -139,7 +166,7 @@ namespace Core
             );
             return tokenOptions;
         }
-        
+
         private static string GenerateRefreshToken()
         {
             var randomNumber = new byte[64];
@@ -177,6 +204,11 @@ namespace Core
                     };
                 }
                 LoginResponse? newAccessToken = await CreateTokenAsync(_user);
+                if (newAccessToken is null)
+                    return new RefreshResponse("a", "a")
+                    {
+                        Status = "400",
+                    };
 
                 return new RefreshResponse("a", "a")
                 {
@@ -190,10 +222,11 @@ namespace Core
                 return new RefreshResponse("a", "a")
                 {
                     Status = "500",
+                    Message = ex.ToString()
                 };
             }
         }
-        
+
         private ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
         {
             var jwtConfig = _configuration.GetSection("jwtConfig");
