@@ -4,7 +4,7 @@ namespace Core
 {
     public interface IRole
     {
-        Task<UpdateProfileRequestResponse> UpdateProfile(User userinfo,UpdateProfileRequest userForRegistration);
+        Task<UpdateProfileRequestResponse> Create(User userinfo,UpdateProfileRequest userForRegistration);
         
     }
 }

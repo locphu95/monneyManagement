@@ -73,16 +73,14 @@ namespace Core
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogDebug($"Error: >>{ex}");
+                        _logger.LogError($"Error: >>{ex}");
                         return identityResult;
                     }
                 }
-
             }
             catch (Exception ex)
             {
-
-                Console.WriteLine($"CreateUserError:{ex}");
+                Console.Write($"CreateUserError:{ex}");
                 return identityResult;
             }
         }

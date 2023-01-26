@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public interface IUser
+    public interface IUser : IDisposable
     {
         Task<UpdateProfileRequestResponse> UpdateProfile(User userinfo,UpdateProfileRequest userForRegistration);
         
