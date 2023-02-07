@@ -1,6 +1,6 @@
 ﻿namespace Core
 {
-    public interface ILoggerManager
+    public interface ILoggerManager : IDisposable
     {
         void LogInfo(string message);
         void LogWarn(string message);

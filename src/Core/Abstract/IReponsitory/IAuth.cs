@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public interface IAuth
+    public interface IAuth : IDisposable
     {
         Task<IdentityResult> RegisterUserAsync(UserRegistrationRequest userForRegistration);
         Task<User> ValidateUserAsync(LoginRequest loginDto);

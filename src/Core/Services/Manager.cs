@@ -6,7 +6,7 @@ namespace Core.Services
 {
     public class Manager : IManager
     {
-        private RepositoryContext _repositoryContext;
+        private UserContext _repositoryContext;
         private Auth? _userAuth;
         private UserService? _userService;
 
@@ -16,7 +16,7 @@ namespace Core.Services
         protected readonly ILoggerManager _logger;
        
 
-        public Manager(RepositoryContext repositoryContext, UserManager<User> userManager, IMapper mapper, IConfiguration configuration, ILoggerManager logger)
+        public Manager(UserContext repositoryContext, UserManager<User> userManager, IMapper mapper, IConfiguration configuration, ILoggerManager logger)
         {
             _repositoryContext = repositoryContext;
             _userManager = userManager;
@@ -25,7 +25,7 @@ namespace Core.Services
             _logger = logger;
         }
 
-        public IAuth Authen
+        public IAuth Auth
         {
             get
             {

@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Core.Migrations
 {
-    [DbContext(typeof(RepositoryContext))]
+    [DbContext(typeof(UserContext))]
     [Migration("20221221171101_InitialCreate")]
     partial class InitialCreate
     {
