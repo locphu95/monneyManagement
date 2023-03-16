@@ -1,10 +1,9 @@
 ﻿namespace Core
 {
-    public interface IManager
+    public interface IManager 
     {
-        IAuth Authen { get; }   
+        IAuth Auth { get; }   
         IUser UserService { get; }
-
         Task SaveAsync();
     }
 }

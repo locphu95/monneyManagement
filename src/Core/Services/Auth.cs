@@ -73,16 +73,14 @@ namespace Core
                     }
                     catch (Exception ex)
                     {
-                        _logger.LogDebug($"Error: >>{ex}");
+                        _logger.LogError($"Error: >>{ex}");
                         return identityResult;
                     }
                 }
-
             }
             catch (Exception ex)
             {
-
-                Console.WriteLine($"CreateUserError:{ex}");
+                Console.Write($"CreateUserError:{ex}");
                 return identityResult;
             }
         }
@@ -276,6 +274,11 @@ namespace Core
         }
 
         public Task<RevokeResponse> RevokeAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
         {
             throw new NotImplementedException();
         }

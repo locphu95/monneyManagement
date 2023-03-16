@@ -6,6 +6,12 @@ namespace Core
     {
         private static ILogger logger = LogManager.GetCurrentClassLogger();
         public LoggerManager() { }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
         public void LogDebug(string message)
         {
             logger.Debug(message);

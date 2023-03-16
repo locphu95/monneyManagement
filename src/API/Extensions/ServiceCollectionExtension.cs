@@ -20,7 +20,7 @@ namespace API.Extensions
         public static void ConfigureMySQLContext(this IServiceCollection services, IConfiguration configuration)
         {
             var connetionString = configuration.GetConnectionString("WebApiDatabase");
-            services.AddDbContext<RepositoryContext>(
+            services.AddDbContext<UserContext>(
                 opts => opts.UseMySql(connetionString, ServerVersion.AutoDetect(connetionString)));
         }
 
@@ -62,7 +62,7 @@ namespace API.Extensions
                 o.Password.RequireNonAlphanumeric = false;
                 o.User.RequireUniqueEmail = true;
             })
-            .AddEntityFrameworkStores<RepositoryContext>()
+            .AddEntityFrameworkStores<UserContext>()
             .AddDefaultTokenProviders();
         }
 

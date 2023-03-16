@@ -12,4 +12,9 @@ namespace Core
         public DateTime RefreshTokenExpiryTime { get; set; }
         public string? ChannelId { get; set; }
     }
+    //todo add fluent
+    // public class FluentUser{
+    //     private User  user = new User();
+    //     public FluentUser  
+    // }
 }

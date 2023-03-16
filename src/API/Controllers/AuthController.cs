@@ -18,17 +18,17 @@ namespace API.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Authenticate([FromBody] LoginRequest user)
         {
-            User resoultLogin = await _repository.Authen.ValidateUserAsync(user);
+            User resoultLogin = await _repository.Auth.ValidateUserAsync(user);
             return resoultLogin is null
                 ? Unauthorized()
-                : Ok(await _repository.Authen.CreateTokenAsync(resoultLogin));
+                : Ok(await _repository.Auth.CreateTokenAsync(resoultLogin));
         }
         [Authorize]
         [HttpPost("refresh-token")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshRequest token)
         {
-            RefreshResponse resoultLogin = await _repository.Authen.RefreshToken(token);
+            RefreshResponse resoultLogin = await _repository.Auth.RefreshToken(token);
             return resoultLogin is null
                 ? Unauthorized()
                 : Ok(resoultLogin);
@@ -37,7 +37,7 @@ namespace API.Controllers
         [HttpPost("revoke/{username}")]
         public async Task<IActionResult> Revoke(RevokeResquest resquest)
         {
-            RevokeResponse response = await _repository.Authen.Revoke(resquest);
+            RevokeResponse response = await _repository.Auth.Revoke(resquest);
             if (response == null) return BadRequest("Invalid user name");
             return NoContent();
         }
@@ -60,7 +60,7 @@ namespace API.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest model)
         {
-            var userExists = await _repository.Authen.RegisterUserAsync(model);
+            var userExists = await _repository.Auth.RegisterUserAsync(model);
             if (userExists == null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists!" });
             return Ok(new { Status = "Success", Message = "User created successfully!" });

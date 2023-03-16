@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public interface IGenericRepository<T> where T : class
+    public interface IGenericRepository<T> 
     {
         T GetById(int id);
         IEnumerable<T> GetAll();
@@ -10,6 +10,7 @@ namespace Core
         void Add(T entity);
         void AddRange(IEnumerable<T> entities);
         void Remove(T entity);
+        void Update(T entity);
         void RemoveRange(IEnumerable<T> entities);
     }
 }

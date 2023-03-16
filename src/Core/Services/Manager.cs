@@ -6,7 +6,7 @@ namespace Core.Services
 {
     public class Manager : IManager
     {
-        private RepositoryContext _repositoryContext;
+        private UserContext _repositoryContext;
         private Auth? _userAuth;
         private UserService? _userService;
 
@@ -14,9 +14,9 @@ namespace Core.Services
         private IMapper _mapper;
         private IConfiguration _configuration;
         protected readonly ILoggerManager _logger;
+       
 
-
-        public Manager(RepositoryContext repositoryContext, UserManager<User> userManager, IMapper mapper, IConfiguration configuration, ILoggerManager logger)
+        public Manager(UserContext repositoryContext, UserManager<User> userManager, IMapper mapper, IConfiguration configuration, ILoggerManager logger)
         {
             _repositoryContext = repositoryContext;
             _userManager = userManager;
@@ -25,7 +25,7 @@ namespace Core.Services
             _logger = logger;
         }
 
-        public IAuth Authen
+        public IAuth Auth
         {
             get
             {
@@ -45,10 +45,28 @@ namespace Core.Services
             }
         }
 
-        
+
 
         public Task SaveAsync() => _repositoryContext.SaveChangesAsync();
+        private bool disposed = false;
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    _repositoryContext.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 
 

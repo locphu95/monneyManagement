@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Core.Migrations
 {
-    [DbContext(typeof(RepositoryContext))]
+    [DbContext(typeof(UserContext))]
     [Migration("20221222183918_update-user-property-v2")]
     partial class updateuserpropertyv2
     {

@@ -4,12 +4,12 @@ using Microsoft.Extensions.Configuration;
 
 namespace Core
 {
-    public class RepositoryContext : IdentityDbContext<User>
+    public class UserContext : IdentityDbContext<User>
     {
         protected readonly IConfiguration Configuration;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        public RepositoryContext(DbContextOptions options, IConfiguration configuration) : base(options)
+        public UserContext(IConfiguration configuration)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Configuration = configuration;
