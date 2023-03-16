@@ -24,7 +24,7 @@ namespace API.Controllers
                 return Unauthorized();
             else if (getUser.Id != userProfile.UserID)
                 return Unauthorized();
-            var resoultLogin = await _repository.UserService.UpdateProfile(getUser,userProfile);
+            var resoultLogin = await Repository.UserService.UpdateProfile(getUser,userProfile);
             return resoultLogin is null
                ? Unauthorized()
                : Ok(resoultLogin);

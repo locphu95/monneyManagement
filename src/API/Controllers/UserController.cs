@@ -21,14 +21,10 @@ namespace API.Controllers
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileRequest userProfile)
         {
             var getUser = await GetUser();
-            if (getUser is null)
+            if (getUser.Id != userProfile.UserID)
                 return Unauthorized();
-            else if (getUser.Id != userProfile.UserID)
-                return Unauthorized();
-            var resoultLogin = await _repository.UserService.UpdateProfile(getUser, userProfile);
-            return resoultLogin is null
-               ? Unauthorized()
-               : Ok(resoultLogin);
+            var resultLogin = await Repository.UserService.UpdateProfile(getUser, userProfile);
+            return Ok(resultLogin);
         }
     }
 }
