@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    [Route("api/auth")]
+    [Route("api/manager-user")]
     [ApiController]
-    public class AuthController : BaseController
+    public class ManamenController : BaseController
     {
-        public AuthController(IManager repository, ILoggerManager logger, IMapper mapper,UserManager<User> userManager) : base(repository, logger, mapper,userManager)
+        public ManamenController(IManager repository, ILoggerManager logger, IMapper mapper,UserManager<User> userManager) : base(repository, logger, mapper,userManager)
         {
         }
 
@@ -18,7 +18,6 @@ namespace API.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Authenticate([FromBody] LoginRequest user)
         {
-            _logger.LogDebug($"{user.RequestId}:{user}");
             User resultLogin = await Repository.Auth.ValidateUserAsync(user);
             return resultLogin is null
                 ? Unauthorized()
@@ -58,16 +57,10 @@ namespace API.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> Register([FromBody] UserRegistrationRequest model)
         {
-            _logger.LogDebug($"{model.RequestId}: {model}");
             var userExists = await Repository.Auth.RegisterUserAsync(model);
-            if (userExists is null){
+            if (userExists is null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new { Status = "Error", Message = "User already exists!" });
-            }else{
-                if(userExists.Succeeded)
-                            return Ok(new { Status = "Success", Message = "User created successfully!" });
-                else
-                return Ok(new{ Status = "Fail", Message = userExists.Errors  });
-            }
+            return Ok(new { Status = "Success", Message = "User created successfully!" });
         }
     }
 

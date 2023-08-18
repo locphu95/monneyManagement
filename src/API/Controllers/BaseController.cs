@@ -8,15 +8,15 @@ namespace API.Controllers
     public class BaseController : ControllerBase
     {
         protected readonly IManager Repository;
-        protected readonly ILoggerManager Logger;
-        protected readonly IMapper Mapper;
+        protected readonly ILoggerManager _logger;
+        protected readonly IMapper _mapper;
         private readonly UserManager<User> _userManager;
 
-        public BaseController(IManager repository, ILoggerManager logger, IMapper mapper,UserManager<User> userManager)
+        public BaseController(IManager repository, ILoggerManager Logger, IMapper Mapper,UserManager<User> userManager)
         {
             Repository = repository;
-            Logger = logger;
-            Mapper = mapper;
+            _logger = Logger;
+            _mapper = Mapper;
             _userManager = userManager;
         }
         [NonAction]

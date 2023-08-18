@@ -28,7 +28,6 @@ namespace API.Controllers
             return resoultLogin is null
                ? Unauthorized()
                : Ok(resoultLogin);
-            return Ok();
         }
     }
 }

@@ -16,12 +16,14 @@ namespace Core
         private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
         private readonly IMapper _mapper;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private User? _user;
         protected readonly ILoggerManager _logger;
 
-        public Auth(UserManager<User> userManager, IConfiguration configuration, IMapper mapper, ILoggerManager logger)
+        public Auth(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IMapper mapper, ILoggerManager logger)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _configuration = configuration;
             _mapper = mapper;
             _logger = logger;
@@ -38,7 +40,7 @@ namespace Core
                     PhoneNumber = userRegistration.PhoneNumber,
                     ChannelId = userRegistration.Channel
                 };
-               
+
                 var userExists = await _userManager.FindByNameAsync(userRegistration.UserName);
                 if (userExists != null)
                     return identityResult;
@@ -47,9 +49,13 @@ namespace Core
                 {
                     try
                     {
-                        identityResult = await _userManager.CreateAsync(user, userRegistration.Password);
+                        // bool existRole = _userManager.
+                        bool isExistRole = await _roleManager.RoleExistsAsync(userRegistration?.RoleName??"");
+                        identityResult = await _userManager.CreateAsync(user, userRegistration?.Password);
+                        _logger.LogDebug($"{userRegistration?.RequestId}: create user {(identityResult.Succeeded==true ? "success":"fail" )}");
                         //todo insert role_user
-                        await _userManager.AddToRoleAsync(user, userRegistration.CreateFash ? RoleType.User.ToString() : userRegistration.RoleName);
+                        if (isExistRole)
+                            await _userManager.AddToRoleAsync(user, userRegistration?.CreateFash?? true ? RoleType.User.ToString() : userRegistration.RoleName);
 
                         //todo check channge request
                         // user claim when using web

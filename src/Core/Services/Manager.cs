@@ -11,15 +11,18 @@ namespace Core.Services
         private UserService? _userService;
 
         private UserManager<User> _userManager;
+        private RoleManager<IdentityRole> _roleManager;
+
         private IMapper _mapper;
         private IConfiguration _configuration;
         protected readonly ILoggerManager _logger;
        
 
-        public Manager(UserContext repositoryContext, UserManager<User> userManager, IMapper mapper, IConfiguration configuration, ILoggerManager logger)
+        public Manager(UserContext repositoryContext, UserManager<User> userManager,RoleManager<IdentityRole> roleManager, IMapper mapper, IConfiguration configuration, ILoggerManager logger)
         {
             _repositoryContext = repositoryContext;
             _userManager = userManager;
+            _roleManager = roleManager;
             _mapper = mapper;
             _configuration = configuration;
             _logger = logger;
@@ -30,7 +33,7 @@ namespace Core.Services
             get
             {
                 if (_userAuth is null)
-                    _userAuth = new Auth(_userManager, _configuration, _mapper, _logger);
+                    _userAuth = new Auth(_userManager, _roleManager,_configuration, _mapper, _logger);
                 return _userAuth;
             }
         }

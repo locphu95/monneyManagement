@@ -28,11 +28,6 @@ namespace Core
             throw new NotImplementedException();
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
-
         public User GetById(int id)
         {
             throw new NotImplementedException();
